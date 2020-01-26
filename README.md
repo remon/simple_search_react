@@ -1,4 +1,4 @@
-## Watch Heroes
+## Simple Search (React Version)
 
 A simple **ReactJs Full Text Search, Rails(API)** .
 
