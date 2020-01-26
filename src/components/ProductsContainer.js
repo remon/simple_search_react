@@ -20,7 +20,6 @@ class ProductsContainer extends Component {
   handleClick = (e, i) => {
     e.preventDefault();
 
-    //console.log(this.props.products[i]);
     const selectedProduct = this.props.products[i];
     this.setState({
       selectedProduct: selectedProduct

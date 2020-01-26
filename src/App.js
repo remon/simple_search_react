@@ -10,6 +10,16 @@ import Header from './components/Header';
 import LoaderContainer from './components/LoaderContainer';
 import ErrorsContainer from './components/ErrorsContainer';
 
+const excludedParams = [
+  'total_pages',
+  'doneSearch',
+  'products',
+  'redirect',
+  'noErrors',
+  'total_products',
+  'isLoadingData'
+];
+
 class App extends Component {
   state = {
     term: '',
@@ -27,7 +37,6 @@ class App extends Component {
   };
 
   setCurrentPage = page => {
-    //console.log(page);
     this.setState(
       {
         page: page + 1,
@@ -106,16 +115,8 @@ class App extends Component {
   loadingData = () => {
     const api_url =
       'https://vanhack-project-search.herokuapp.com/api/products.json';
-
-    const getQueryValues = _.omit(this.state, [
-      'total_pages',
-      'doneSearch',
-      'products',
-      'redirect',
-      'isLoadingData',
-      'noErrors',
-      'total_products'
-    ]);
+    const mystate = this.state;
+    const getQueryValues = _.omit(mystate, excludedParams);
     const queryValues = new URLSearchParams(getQueryValues).toString();
 
     axios
@@ -173,17 +174,9 @@ class App extends Component {
       page,
       noErrors
     } = mystate;
-    const getQueryValues = _.omit(mystate, [
-      'total_pages',
-      'doneSearch',
-      'products',
-      'redirect',
-      'noErrors',
-      'total_products',
-      'isLoadingData'
-    ]);
+    const getQueryValues = _.omit(mystate, excludedParams);
     const query = new URLSearchParams(getQueryValues).toString();
-    console.log('produstc are' + products);
+
     return (
       <BrowserRouter>
         <Header />
